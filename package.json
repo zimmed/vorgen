@@ -1,11 +1,12 @@
 {
   "name": "@zimmed/vorgen",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Voronoi Grid Generator",
   "main": "lib/index.js",
   "language": "en-US",
   "scripts": {
-    "build": "tsc -p tsconfig.json"
+    "build": "tsc -p tsconfig.json",
+    "demo": "ts-node example/demo.ts"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "prettier": "^1.16.4",
+    "ts-node": "^8.0.3",
     "tslint": "^5.14.0",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.3.3333",

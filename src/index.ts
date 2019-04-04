@@ -1,1 +1,4 @@
-export { default } from './Generator';
+import Vorgen from './Generator';
+
+export default Vorgen;
+

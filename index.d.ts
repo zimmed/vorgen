@@ -1,3 +1,4 @@
+import Prando from 'prando';
 export { default } from './lib';
 
 interface ICell<CellType = any> {
@@ -28,39 +29,27 @@ interface IPoint<Def extends { type: any } = IWCellDef> {
   y: number;
 }
 
-enum Status {
+declare enum Status {
   Init = 'Initial generation complete.',
   Additional = 'Finished secondary pass.',
   Expand = 'Finished 2N+1 expansion of grid.',
 }
 
-type ManualDef<T> = [IPoint<INCellDef<T>>, ...Array<IPoint<INCellDef<null>>>];
-
 interface IDef<T> {
   cellType?: T | T[];
   defs?: Array<INCellDef<T>>;
-  def?: ManualDef<T>;
+  def?: Array<IPoint<INCellDef<T>>>;
 }
 
 declare module '@zimmed/vorgen' {
 
-  export default class Generator {
-  public static Status = Status;
+  export default class Vorgen {
+  public static Status: typeof Status;
 
   public static randomizedEdgePoints(
     width: number,
     height: number,
-    {
-      seed,
-      prando,
-      autoIncludeCorners = false,
-      numberPerSide = 1,
-      top = true,
-      left = true,
-      bottom = true,
-      right = true,
-      maxDistanceFromEdge = Math.round(0.05 * width + 0.05 * height),
-    }: {
+    opts?: {
       seed?: string;
       prando?: Prando;
       autoIncludeCorners?: boolean;
@@ -70,26 +59,14 @@ declare module '@zimmed/vorgen' {
       bottom?: boolean;
       right?: boolean;
       maxDistanceFromEdge?: number;
-    } = {}
+    }
   ): Array<{ x: number; y: number }>;
 
-  public static async createGrid<T = string, C extends ICell<T> = ICell<T>>(
+  public static createGrid<T = string, C extends ICell<T> = ICell<T>>(
     width: number,
     height: number,
     terrainDef: Array<IWCellDef<T>>,
-    {
-      seed,
-      prando,
-      split,
-      numPoints,
-      normalizePower,
-      typeForEdgeExpansion,
-      onUpdate = NOOP,
-      preExpandDefs = [],
-      postExpandDefs = [],
-      expandCount = 0,
-      heuristic = 'euclid',
-    }: {
+    opts?: {
       seed?: string;
       prando?: Prando;
       split?: number;
@@ -101,7 +78,7 @@ declare module '@zimmed/vorgen' {
       typeForEdgeExpansion?: T;
       normalizePower?: number;
       heuristic?: 'manhattan' | 'euclid';
-    } = {}
+    }
   ): Promise<C[][]>;
 }
 }

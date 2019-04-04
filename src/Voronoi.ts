@@ -32,8 +32,8 @@ type Async<F extends (...args: any) => any> = F extends (
   : never;
 
 const sortWByH = (h: (p: { x: number; y: number }) => number) => (
-  { def: { weight: aW = 0, maxRadius: aM = 0 }, ...a }: IPoint<IWCellDef>,
-  { def: { weight: bW = 0, maxRadius: bM = 0 }, ...b }: IPoint<IWCellDef>
+  { def: { weight: aW = 1, maxRadius: aM = 0 }, ...a }: IPoint<IWCellDef>,
+  { def: { weight: bW = 1, maxRadius: bM = 0 }, ...b }: IPoint<IWCellDef>
 ) => {
   const dx = h(a);
   const dy = h(b);
@@ -403,7 +403,7 @@ export default class Voronoi {
       .fill(0)
       .map((_, i) => i);
     const [calcedTypes, max] = types
-      .sort(({ weight: a = 0 }, { weight: b = 0 }) =>
+      .sort(({ weight: a = 1 }, { weight: b = 1 }) =>
         a < b ? 1 : a > b ? -1 : 0
       )
       .reduce(

@@ -11,11 +11,11 @@ enum Status {
   Expand = 'Finished 2N+1 expansion of grid.',
 }
 
-type ManualDef<T> = [IPoint<INCellDef<T>>, ...Array<IPoint<INCellDef<null>>>];
+type ManualDef<T> = Array<IPoint<INCellDef<T>>>;
 interface IDef<T> {
   cellType?: T | T[];
   defs?: Array<INCellDef<T>>;
-  def?: ManualDef<T>;
+  def?: ManualDef<T | null>;
 }
 
 const yAxisPoints = (
@@ -187,8 +187,9 @@ export default class Generator {
    *      @param {number} [opts.preExpandDefs[].defs[].powerDecay] (= 0) - Decay the expansion magnitude over distance from the center
    *      @param {number} [opts.preExpandDefs[].defs[].maxRadius] - f set, restricts the generation of the voronoi expansion to the specified radius
    *    @param {object[]} [opts.preExpandDefs[].def] - Instead of defs, this may be set with a manual point definition
-   *      @param {NDef} opts.preExpandDefs[].def[0] - Point to initiate Voronoi expansion for type (see above description for NDef type)
-   *      @param {NullNDef} [opts.preExpandDefs[].def[1..N]] - Normalize points with NDefs of type=null (randomizeEdgePoints often used to generate these)
+   *      @param {Point} opts.preExpandDefs[].def[0] - Point to initiate Voronoi expansion for type
+   *        @param {NDef} opts.preExpandDefs[].def[0].def - see above description for NDef type
+   *      @param {Point} [opts.preExpandDefs[].def[1..N]] - Normalize points with NDefs of type=null (randomizeEdgePoints often used to generate these)
    * @returns {object[][]} grid - The generated grid
    *  @returns {number} grid[][].x
    *  @returns {number} grid[][].y
@@ -244,7 +245,7 @@ export default class Generator {
         : def && def.length
         ? await Voronoi.applyManualPlotAsync(
             grid,
-            def[0],
+            def[0] as IPoint<INCellDef<T>>,
             def.slice(1) as ManualDef<null>,
             {
               onlyOnType: cellType,
@@ -274,7 +275,7 @@ export default class Generator {
         : def && def.length
         ? await Voronoi.applyManualPlotAsync(
             grid,
-            def[0],
+            def[0] as IPoint<INCellDef<T>>,
             def.slice(1) as ManualDef<null>,
             {
               onlyOnType: cellType,
