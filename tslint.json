@@ -1,0 +1,26 @@
+{
+  "extends": ["tslint:latest", "tslint-config-prettier"],
+  "linterOptions": {
+    "exclude": [
+      "node_modules/**/*",
+      "coverage/**/*",
+      "build/**/*",
+      "lib/**/*"
+    ]
+  },
+  "compilerOptions": {
+    "plugins": [{ "name": "typescript-tslint-plugin" }]
+  },
+  "noSubmoduleImports": 0,
+  "rules": {
+    "no-shadowed-variable": [
+      true,
+      {
+        "underscore": false
+      }
+    ],
+    "ordered-imports": false,
+    "object-literal-sort-keys": false,
+    "no-this-assignment": false
+  }
+}

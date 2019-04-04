@@ -1,0 +1,36 @@
+{
+  "name": "@zimmed/vorgen",
+  "version": "0.1.0",
+  "description": "Voronoi Grid Generator",
+  "main": "lib/index.js",
+  "language": "en-US",
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zimmed/vorgen.git"
+  },
+  "keywords": [
+    "Voronoi",
+    "TypeScript",
+    "Procedural-Generation",
+    "GameDev"
+  ],
+  "author": "zimmed@zimmed.io",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zimmed/vorgen/issues"
+  },
+  "homepage": "https://github.com/zimmed/vorgen#readme",
+  "dependencies": {
+    "prando": "^5.1.0"
+  },
+  "devDependencies": {
+    "prettier": "^1.16.4",
+    "tslint": "^5.14.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.3.3333",
+    "typescript-tslint-plugin": "^0.3.1"
+  }
+}

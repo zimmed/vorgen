@@ -1,0 +1,7 @@
+*.js -lf
+*.ts -lf
+*.json -lf
+*.css -lf
+*.md -lf
+./.* -lf
+./**/*.* -lf
